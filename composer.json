@@ -1,0 +1,28 @@
+{
+    "name": "lazyou/laravel-quick",
+    "authors": [
+        {
+            "name": "lazyou"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lazyou\\Quick\\": "src/"
+        },
+        "files": [
+            "src/Libs/Function.php"
+        ]
+    },
+    "require": {
+        "php": "^7.4|^8.0",
+        "mews/captcha": "^3.2",
+        "qiniu/php-sdk": "^7.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lazyou\\Quick\\Providers\\QuickServiceProvider"
+            ]
+        }
+    }
+}
