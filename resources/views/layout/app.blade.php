@@ -46,10 +46,22 @@
             <el-container>
                 <el-aside width="200px" style="background-color: rgb(238, 241, 246);">
                     <el-menu default-active="{{ $_menu_active }}">
-                        <el-menu-item index="0" disabled style="text-align: center; font-size: 28px; line-height: 52px;">
+                        <el-menu-item index="0" style="text-align: center; font-size: 28px; line-height: 52px;">
 {{--                            <i class="{{ $menu['icon'] }}"></i>--}}
                             <span slot="title" >
-                                <strong>{{ config('quick.admin_name', '') }}</strong>
+{{--                                <strong>{{ config('quick.admin_name', '') }}</strong>--}}
+                                {{-- 登录用户、注销 --}}
+                                <el-dropdown>
+                                    <span class="el-dropdown-link">
+                                        <strong><i class="el-icon-s-custom"></i>{{ $_auth->name }}</strong>
+                                        <i class="el-icon-arrow-down el-icon--rightL:"></i>
+                                    </span>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-link href="/{{config('quick.admin_path', 'admin')}}/auth/logout">
+                                            <el-dropdown-item icon="el-icon-close">注销</el-dropdown-item>
+                                        </el-link>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
                             </span>
                         </el-menu-item>
 
@@ -80,19 +92,19 @@
                 </el-aside>
 
                 <el-container>
-                    <el-header style="height: 56px;">
-                        <el-dropdown>
-                          <span class="el-dropdown-link">
-                              {{ $_auth->name }}
-                              <i class="el-icon-arrow-down el-icon--right"></i>
-                          </span>
-                        <el-dropdown-menu slot="dropdown">
-                            <el-link href="/{{config('quick.admin_path', 'admin')}}/auth/logout">
-                                <el-dropdown-item>注销</el-dropdown-item>
-                            </el-link>
-                        </el-dropdown-menu>
-                        </el-dropdown>
-                    </el-header>
+{{--                    <el-header style="height: 56px;">--}}
+{{--                        <el-dropdown>--}}
+{{--                          <span class="el-dropdown-link">--}}
+{{--                              {{ $_auth->name }}--}}
+{{--                              <i class="el-icon-arrow-down el-icon--right"></i>--}}
+{{--                          </span>--}}
+{{--                        <el-dropdown-menu slot="dropdown">--}}
+{{--                            <el-link href="/{{config('quick.admin_path', 'admin')}}/auth/logout">--}}
+{{--                                <el-dropdown-item>注销</el-dropdown-item>--}}
+{{--                            </el-link>--}}
+{{--                        </el-dropdown-menu>--}}
+{{--                        </el-dropdown>--}}
+{{--                    </el-header>--}}
 
                     <el-main v-loading.fullscreen.lock="main_loading">
                         @yield('content')
