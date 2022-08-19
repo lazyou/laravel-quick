@@ -34,9 +34,9 @@
                 height: 40px;
                 line-height: 50px;
             }
-            .el-form, .el-form-item{
-                margin-bottom: 0px !important;
-            }
+            /*.el-form, .el-form-item{*/
+            /*    margin-bottom: 0px !important;*/
+            /*}*/
         </style>
         @stack('css')
     </head>
