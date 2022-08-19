@@ -69,7 +69,7 @@ axios.interceptors.response.use(
         const response = error.response;
 
         // TODO: 其他错误码
-        if (response.status === 400 || response.status === 403) {
+        if (response.status === 400 || response.status === 403 || response.status === 422) {
             let message = response.data.message || response.statusText;
             messageError(message);
             return Promise.reject(error);

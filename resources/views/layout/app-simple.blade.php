@@ -15,7 +15,7 @@
 
         <script>
             @yield('content-vue')
-            Vue.use(ElementUI, {size: 'small'})
+            Vue.use(ElementUI, {size: "{{ config('quick.ui_size')  }}"})
             new Vue(obj);
         </script>
 

@@ -1,6 +1,9 @@
 <?php
 
 return [
+    // medium / small / mini
+    'ui_size' => 'medium',
+
     // title 标签
     'admin_title' => 'Quick Laravel',
 
