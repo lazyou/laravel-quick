@@ -44,12 +44,11 @@ class QuickOperationLog
 
     /**
      * 是否记录操作日志.
+     * @param Request $request
      * @return bool
      */
-    protected function isLogging(Request $request)
+    protected function isLogging(Request $request): bool
     {
-//        return true;
-        // 避免记录视图相关
         return $request->wantsJson() && ! $this->blockListUrl($request) && ! $this->blockListAs($request);
     }
 
@@ -60,7 +59,7 @@ class QuickOperationLog
      */
     protected function blockListUrl(Request $request): bool
     {
-        return in_array($request->path(), config('quick.block_path_list', []));
+        return in_array('/' . $request->path(), config('quick.block_path_list', []));
     }
 
     /**
