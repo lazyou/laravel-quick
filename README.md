@@ -24,5 +24,19 @@ php artisan quick:install
 * `APP_TIMEZONE=Asia/Shanghai`
 
 
-### 路由说明
+### 后台开发
+* `app/Providers/RouteServiceProvider.php` 的 `boot` 方法添加如下
+    ```php
+    $adminPath = config('quick.admin_path', 'admin');
+    Route::middleware(['web', 'quick.auth', 'quick.log'])
+        ->prefix("/$adminPath")
+        ->group(base_path('routes/quick_admin.php'));
+    ```
+
+* `touch routes/quick_admin.php`
+    ```php
+    Route::get('/example', [ExampleController::class, 'index'])->name('admin.example.index');
+    ```
+
+
 * 视图路由必须设置 name, 用作视图渲染和权限管理

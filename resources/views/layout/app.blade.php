@@ -141,7 +141,7 @@
             //     },
             // };
             // element-ui全局设置组件大小 https://blog.csdn.net/weixin_44795287/article/details/113841395
-            Vue.use(ElementUI, {size: "{{ config('quick.ui_size')  }}"})
+            Vue.use(ElementUI, {size: "{{ config('quick.ui_size') }}"})
             new Vue(obj);
         </script>
 

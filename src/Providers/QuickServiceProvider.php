@@ -92,7 +92,7 @@ class QuickServiceProvider extends ServiceProvider
 //        $this->mergeConfigFrom(__DIR__ . '/../../config/quick_logging.php', 'logging');
     }
 
-    protected function logMysql()
+    protected function logMysql(): bool
     {
         if (! in_array(config('app.env'), ['dev', 'local', 'develop'])) {
             return false;
@@ -117,5 +117,7 @@ class QuickServiceProvider extends ServiceProvider
                 Log::info($query);
             }
         );
+
+        return true;
     }
 }

@@ -44,13 +44,14 @@
                         <el-input v-model="menu_form.name"></el-input>
                     </el-form-item>
                     <el-form-item label="链接" prop="url">
-                        <el-input v-model="menu_form.url"></el-input>
+                        <el-input v-model="menu_form.url" placeholder="请以 / 开头"></el-input>
                     </el-form-item>
                     <el-form-item label="排序" prop="sort">
                         <el-input-number controls-position="right" v-model="menu_form.sort" :min="1" :max="999" label="排序"></el-input-number>
                     </el-form-item>
                     <el-form-item label="图标" prop="icon">
                         <el-input v-model="menu_form.icon" :prefix-icon="menu_form.icon"></el-input>
+                        <el-link type="primary" href="https://element.eleme.cn/#/zh-CN/component/icon" target="_blank">图标来源</el-link>
                     </el-form-item>
                     <el-form-item label="状态" prop="status">
                         <el-switch v-model="menu_form.status" :active-value="1" :inactive-value="2"></el-switch>
