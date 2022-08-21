@@ -19,9 +19,9 @@ class MakeControllerCommand extends Command
      */
     protected $signature = 'quick:make-controller {model}
         {--subDir=Admin : 子目录，默认Admin}
-        {--deleteRequest=0 : 移除请求验证，默认0}
-        {--showOnly=0 : 展示代码，方便复制，默认0}
-        {--force=0 : 强制覆盖文件，默认0}
+        {--deleteRequest=0 : 移除请求验证}
+        {--showOnly=0 : 展示代码，方便复制}
+        {--force=0 : 强制覆盖文件}
     ';
 
     /**
@@ -50,7 +50,7 @@ class MakeControllerCommand extends Command
     protected $deleteRequest = false;
 
     // 强制覆盖文件
-    protected $force = true;
+    protected $force = false;
 
     // 输出内容（不生成文件）
     protected $showOnly = false;
@@ -84,7 +84,7 @@ class MakeControllerCommand extends Command
         $this->force = (bool) $this->option('force');
         $this->showOnly = (bool) $this->option('showOnly');
 
-        if ($this->checkExist()) {
+        if ($this->checkExist() && ! $this->showOnly) {
             if (! $this->force) {
                 $this->error("{$this->filePath} 文件已存在");
                 return false;

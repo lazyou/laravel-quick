@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Models;
+
+use Lazyou\Quick\Models\QuickBase;
+
+/**{$fieldsContent} */
+class {$model} extends QuickBase
+{
+    protected $table = '{$table}';
+
+    protected $fillable = [];
+}
