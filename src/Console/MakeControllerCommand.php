@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
 /**
- * 控制器快速生成 php artisan quick:make-controller User [--deleteRequest=1] [--force=1]
+ * 控制器快速生成 php artisan quick:make-controller User [--deleteRequest=1] [--force=1] [--showOnly=1]
  * Class MakeControllerCommand
  * @package Lazyou\Quick\Console
  */
@@ -20,6 +20,7 @@ class MakeControllerCommand extends Command
     protected $signature = 'quick:make-controller {model}
         {--subDir=Admin : 子目录，默认Admin}
         {--deleteRequest=0 : 移除请求验证，默认0}
+        {--showOnly=0 : 展示代码，方便复制，默认0}
         {--force=0 : 强制覆盖文件，默认0}
     ';
 
@@ -51,6 +52,9 @@ class MakeControllerCommand extends Command
     // 强制覆盖文件
     protected $force = true;
 
+    // 输出内容（不生成文件）
+    protected $showOnly = false;
+
     // 生成路径
     protected $filePath;
 
@@ -78,6 +82,7 @@ class MakeControllerCommand extends Command
 
         $this->deleteRequest = (bool) $this->option('deleteRequest');
         $this->force = (bool) $this->option('force');
+        $this->showOnly = (bool) $this->option('showOnly');
 
         if ($this->checkExist()) {
             if (! $this->force) {
@@ -87,6 +92,11 @@ class MakeControllerCommand extends Command
         }
 
         $this->makeContent();
+
+        if ($this->showOnly) {
+            $this->info($this->content);
+            return true;
+        }
 
         if (file_put_contents($this->filePath, $this->content)) {
             $this->info("{$this->filePath} 写入成功");
