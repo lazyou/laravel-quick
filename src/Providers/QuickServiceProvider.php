@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Lazyou\Quick\Console\InstallCommand;
+use Lazyou\Quick\Console\MakeControllerCommand;
 use Lazyou\Quick\Http\Middleware\QuickAuthenticate;
 use Lazyou\Quick\Http\Middleware\QuickOperationLog;
 
@@ -23,6 +24,7 @@ class QuickServiceProvider extends ServiceProvider
      */
     protected $commands = [
         InstallCommand::class,
+        MakeControllerCommand::class,
     ];
 
     /**

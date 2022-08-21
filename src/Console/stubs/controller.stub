@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers\{$subDir};
+
+use App\Http\Requests\{$subDir}\{$model}DeleteRequest;
+use App\Http\Requests\{$subDir}\{$model}EditRequest;
+use App\Models\{$model};
+use Illuminate\Http\Request;
+use Lazyou\Quick\Http\Controllers\Admin\QuickBaseController;
+
+class {$controller}Controller extends QuickBaseController
+{
+    public function index(Request $request)
+    {
+        if (! $request->wantsJson()) {
+            $this->setHeadTitle('{$model} 管理');
+            return $this->view();
+        }
+
+        $map = [
+            'id',
+            'name' => 'like',
+        ];
+
+        return vuePaginate({$model}::class, $map);
+    }
+
+    /**
+     * 创建or编辑数据处理
+     * @param {$model}EditRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function edit({$model}EditRequest $request)
+    {
+        $id = $request->get('id');
+        $input = $request->only([
+            'xx',
+        ]);
+
+        if ($id) {
+            ${$modelCamel} = {$model}::query()->findOrFail($id);
+            ${$modelCamel}->update($input);
+        } else {
+            {$model}::query()->create($input);
+        }
+
+        return $this->apiOk();
+    }
+
+    /**
+     * 删除数据
+     * @param {$model}DeleteRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete({$model}DeleteRequest $request, $id)
+    {
+        ${$modelCamel} = {$model}::query()->findOrFail($id);
+        // TODO: 判断数据是否被使用 决定能否被删除
+        ${$modelCamel}->delete();
+
+        return $this->apiOk();
+    }
+}
