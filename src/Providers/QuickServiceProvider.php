@@ -11,6 +11,7 @@ use Illuminate\Support\ServiceProvider;
 use Lazyou\Quick\Console\InstallCommand;
 use Lazyou\Quick\Console\MakeControllerCommand;
 use Lazyou\Quick\Console\MakeModelCommand;
+use Lazyou\Quick\Console\MakeRouteCommand;
 use Lazyou\Quick\Http\Middleware\QuickAuthenticate;
 use Lazyou\Quick\Http\Middleware\QuickOperationLog;
 
@@ -27,6 +28,7 @@ class QuickServiceProvider extends ServiceProvider
         InstallCommand::class,
         MakeControllerCommand::class,
         MakeModelCommand::class,
+        MakeRouteCommand::class,
     ];
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
 /**
- * 控制器快速生成 php artisan quick:make-controller User [--deleteRequest=1] [--force=1] [--showOnly=1]
+ * 控制器快速生成 php artisan quick:make-controller User [--deleteRequest=1] [--showOnly=1] [--force=1]
  * Class MakeControllerCommand
  * @package Lazyou\Quick\Console
  */

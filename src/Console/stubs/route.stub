@@ -1,0 +1,4 @@
+    // XX管理
+    Route::get('/{$table}', [{$controller}Controller::class, 'index'])->name('admin.{$table}.index');
+    Route::post('/{$table}', [{$controller}Controller::class, 'edit'])->name('admin.{$table}.edit');
+    Route::delete('/{$table}/{id}', [{$controller}Controller::class, 'delete'])->name('admin.{$table}.delete');

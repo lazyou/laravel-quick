@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 /**
- * 模型快速生成 php artisan quick:make-model user [--force=1] [--showOnly=1] [ --noType=1]
+ * 模型快速生成 php artisan quick:make-model user [--showOnly=1] [ --noType=1] [--force=1]
  * Class MakeModelCommand
  * @package Lazyou\Quick\Console
  */
