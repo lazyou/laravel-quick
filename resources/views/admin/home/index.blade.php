@@ -16,18 +16,21 @@
                 <el-step title="步骤 0 -- 后台路由" >
                     <div slot="description">
                         <p>请参考 README.md 设置后台路由文件 <code>routes/quick_admin.php</code></p>
+                        <br>
                     </div>
                 </el-step>
 
                 <el-step title="步骤 1 -- 创建菜单" >
                     <div slot="description">
                         <p>系统管理 -> 菜单管理 -> 创建菜单</p>
+                        <br>
                     </div>
                 </el-step>
 
                 <el-step title="步骤 2 -- 路由与控制器">
                     <div slot="description">
                         <p>填写路由地址 -> 创建对应的控制器</p>
+                        <br>
                     </div>
                 </el-step>
 
@@ -35,6 +38,7 @@
                     <div slot="description">
                         <p>系统管理 -> 权限管理 -> 设置所属菜单，填写权限名称</p>
                         <p>模板中使用权限验证 <code>v-show="{{ 'p(\'admin.xxx.delete\')' }}"</code></p>
+                        <br>
                     </div>
                 </el-step>
             </el-steps>

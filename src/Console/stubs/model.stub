@@ -10,4 +10,6 @@ class {$model} extends QuickBase
     protected $table = '{$table}';
 
     protected $fillable = [];
+
+    protected $appends = [];
 }
