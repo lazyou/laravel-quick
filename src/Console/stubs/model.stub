@@ -12,4 +12,7 @@ class {$model} extends QuickBase
     protected $fillable = [];
 
     protected $appends = [];
+
+    const ATTRIBUTES = [{$attributesContent}
+    ];
 }

@@ -41,6 +41,9 @@ class MakeModelCommand extends Command
     // 模型属性内容
     protected $fieldsContent = '';
 
+    // 模型属性中文翻译
+    protected $attributesContent = '';
+
     // 模板内容
     protected $content = '';
 
@@ -61,6 +64,17 @@ class MakeModelCommand extends Command
         'created_at',
         'updated_at',
         'deleted_at',
+    ];
+
+    // 常用字段翻译
+    protected $attributesMap = [
+        'id' => 'ID',
+        'name' => '名字',
+        'title' => '标题',
+        'status' => '状态',
+        'created_at' => '创建时间',
+        'updated_at' => '更新时间',
+        'deleted_at' => '删除时间',
     ];
 
     /**
@@ -130,6 +144,7 @@ class MakeModelCommand extends Command
             '{$model}' => $this->model,
             '{$table}' => $this->table,
             '{$fieldsContent}' => $this->fieldsContent,
+            '{$attributesContent}' => $this->attributesContent,
         ];
 
         $this->content = str_replace(array_keys($replaces), array_values($replaces), $this->content);
@@ -174,6 +189,7 @@ class MakeModelCommand extends Command
         $lastIndex = $count - 1;
 
         foreach ($fields as $index => $field) {
+            // mysql 字段 转 php类型，并生成内容
             $phpType = $this->mysqlTypeToPhpType($field->data_type);
             $phpType = $this->noType ? '' : "{$phpType} "; // 有类型注意右边留一个空格
 
@@ -181,13 +197,19 @@ class MakeModelCommand extends Command
             if (! empty($field->column_comment)) {
                 $this->fieldsContent = "{$this->fieldsContent} {$field->column_comment}";
             }
-
             if ($index === $lastIndex) {
                 $this->fieldsContent = "{$this->fieldsContent}{$eof}";
             }
-        }
 
-        dd($this->fieldsContent);
+            // 生成属性中文翻译
+            $empty8 = '        ';
+            $columnComment = empty($field->column_comment) ? $field->column_name : $field->column_comment; // 没注释则用字段名
+            if (in_array($field->column_name, array_keys($this->attributesMap))) {
+                $columnComment = $this->attributesMap[$field->column_name];
+            }
+
+            $this->attributesContent = "{$this->attributesContent}{$eof}{$empty8}'{$field->column_name}' => '{$columnComment}',";
+        }
     }
 
     // mysql 字段类型对应 php 的类型
