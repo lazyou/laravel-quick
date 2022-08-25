@@ -1,4 +1,8 @@
-    // XX管理
-    Route::get('/{$table}', [{$controller}Controller::class, 'index'])->name('admin.{$table}.index');
-    Route::post('/{$table}', [{$controller}Controller::class, 'edit'])->name('admin.{$table}.edit');
-    Route::delete('/{$table}/{id}', [{$controller}Controller::class, 'delete'])->name('admin.{$table}.delete');
+// 请复制如下代码到路由文件 quick_admin.php
+
+use App\Http\Controllers\Admin\{$controller}Controller;
+
+// XX管理
+Route::get('/{$table}', [{$controller}Controller::class, 'index'])->name('admin.{$table}.index');
+Route::post('/{$table}', [{$controller}Controller::class, 'edit'])->name('admin.{$table}.edit');
+Route::delete('/{$table}/{id}', [{$controller}Controller::class, 'delete'])->name('admin.{$table}.delete');
