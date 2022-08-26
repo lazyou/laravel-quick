@@ -1,0 +1,76 @@
+let obj = {
+    el: '#app',
+    data: () => {
+        return {
+            ...appData,
+
+            // 列表
+            list: [],
+            total: 0,
+            params: {
+                page: 1,
+                limit: 15,
+                name: null,
+            },
+
+            // 表单弹框
+            dialog: false,
+            dialog_title: '',
+            dialog_loading: false,
+            {$table}_form: {},
+            // 表单初始化
+            {$table}_init: {
+{$formInitContent}            },
+            // 表单规则: 制作基础验证，其他交给后端验证
+            {$table}_rules: {
+{$formRulesContent}           },
+            // 下拉选项
+{$optionContent}
+        }
+    },
+    created() {
+        this.getList();
+{$optionMethodCallContent}    },
+    methods: {
+        // 获取下拉数据
+{$optionMethodContent}
+        // 点击编辑 || 创建
+        openEdit({$table}) {
+            this.{$table}_form = {$table};
+            this.dialog_title = {$table}.id ? '编辑XX' : '添加XX';
+            this.dialog = true;
+        },
+        // 编辑保存
+        rowEdit() {
+            this.$refs['{$table}Form'].validate((valid) => {
+                if (valid) {
+                    this.dialog_loading = true;
+                    axios.post('{$urlList}', { ...this.{$table}_form })
+                        .then((res) => {
+                            this.dialog = false;
+                            this.getList();
+                        }).finally(() => {
+                            this.dialog_loading = false;
+                        });
+                }
+            });
+        },
+        // 获取表格数据
+        getList() {
+            this.main_loading = true;
+
+            axios.get('{$urlList}', { params: this.params })
+                .then((res) => {
+                    this.list = res.data;
+                    this.total = res.total;
+                }).finally(() => {
+                    this.main_loading = false;
+                });
+        },
+        // 每页数量变化
+        paginationChange() {
+            this.getList();
+        },
+    },
+};
+

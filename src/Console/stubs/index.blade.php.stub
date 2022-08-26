@@ -1,0 +1,50 @@
+@extends('quick::layout.app')
+
+@section('content')
+    <div id="action">
+{{--        @if(permission('admin.{$table}.edit'))--}}
+            <el-button v-show="{{ p('admin.{$table}.edit') }}"  @click="openEdit({$table}_init)" type="primary">添加{$table}</el-button>
+{{--        @endif--}}
+        <el-input v-model="params.name" @keyup.enter.native="getList" clearable placeholder="名字" style="width: 180px;"></el-input>
+        <el-button @click="getList" icon="el-icon-search" type="primary"></el-button>
+    </div>
+
+    <div id="dialog" v-loading="dialog_loading">
+        <el-dialog :visible.sync="dialog" :title="dialog_title">
+            <el-form :model="{$table}_form" :rules="{$table}_rules" ref="{$table}Form" label-width="100px">
+{$formContent}
+            </el-form>
+
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialog = false">取消</el-button>
+                <el-button @click="rowEdit" v-show="{{ p('admin.{$table}.edit') }}" type="primary" >提交</el-button>
+            </span>
+        </el-dialog>
+    </div>
+
+    <div id="table">
+        <el-table :data="list" v-loading="loading" :data="data" border fit highlight-current-row>
+{$tableContent}
+        </el-table>
+
+        <vue-pagination
+            :total="total"
+            :page.sync="params.page"
+            :limit.sync="params.limit"
+            @pagination="paginationChange">
+        </vue-pagination>
+    </div>
+@endsection
+
+@push('css')
+    <style>
+    </style>
+@endpush
+
+@section('component-vue')
+    @include('quick::component.pagination.pagination')
+@endsection
+
+@section('content-vue')
+    @include('{$subDir}.{$fileDir}.index_vue')
+@endsection
