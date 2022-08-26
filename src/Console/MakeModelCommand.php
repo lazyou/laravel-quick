@@ -221,6 +221,7 @@ class MakeModelCommand extends Command
             case 'text':
             case 'mediumtext':
             case 'longtext':
+            case 'date':
                 return 'string';
             case 'tinyint':
             case 'smallint':
