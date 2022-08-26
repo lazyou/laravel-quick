@@ -16,7 +16,7 @@ class {$request}Request extends FormRequest
      */
     public function authorize()
     {
-        return true; // permission();
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class {$request}Request extends FormRequest
      */
     public function rules(Request $request)
     {
-        $id = $request->get('id');
+        $id = $request->get('id', 0);
 
         $rules = [
             'name' => [
@@ -47,8 +47,6 @@ class {$request}Request extends FormRequest
      */
     public function attributes()
     {
-        return [
-//           'name' => '名字',
-       ];
+        return {$model}::ATTRIBUTES;
     }
 }
