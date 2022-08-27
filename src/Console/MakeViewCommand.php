@@ -5,7 +5,6 @@ namespace Lazyou\Quick\Console;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Lazyou\Quick\Models\QuickBase;
 
 /**
  * php artisan quick:make-vue quick_user --force=1 --showOnly=1
@@ -23,7 +22,7 @@ class MakeViewCommand extends Command
         {--model= : 模型名}
         {--subDir=admin : 子目录，默认admin}
         {--showOnly=0 : 展示代码，方便复制}
-        {--force=0 : 强制覆盖文件}
+        {--force=0 : 强制覆盖文件(建议只在开发Command中使用)}
     ';
 
     /**
@@ -112,7 +111,7 @@ class MakeViewCommand extends Command
 
         if ($this->checkExist() && ! $this->showOnly) {
             if (! $this->force) {
-                $this->error("{$this->filePathPhp} 文件已存在");
+                echo("{$this->filePathPhp} 文件已存在 \n");
                 return false;
             }
         }
@@ -128,15 +127,15 @@ class MakeViewCommand extends Command
         }
 
         if (file_put_contents($this->filePathPhp, $this->contentPhp)) {
-            $this->info("{$this->filePathPhp} 写入成功");
+            echo("{$this->filePathPhp} 写入成功 \n");
         } else {
-            $this->error("{$this->filePathPhp} 写入失败");
+            echo("{$this->filePathPhp} 写入失败 \n");
         }
 
         if (file_put_contents($this->filePathJs, $this->contentJs)) {
-            $this->info("{$this->filePathJs} 写入成功");
+            echo("{$this->filePathJs} 写入成功 \n");
         } else {
-            $this->error("{$this->filePathJs} 写入失败");
+            echo("{$this->filePathJs} 写入失败 \n");
         }
 
         return true;

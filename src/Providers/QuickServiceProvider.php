@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Lazyou\Quick\Console\InstallCommand;
 use Lazyou\Quick\Console\MakeControllerCommand;
+use Lazyou\Quick\Console\MakeCurdCommand;
 use Lazyou\Quick\Console\MakeViewCommand;
 use Lazyou\Quick\Console\MakeModelCommand;
 use Lazyou\Quick\Console\MakeRequestCommand;
@@ -33,6 +34,7 @@ class QuickServiceProvider extends ServiceProvider
         MakeRouteCommand::class,
         MakeRequestCommand::class,
         MakeViewCommand::class,
+        MakeCurdCommand::class,
     ];
 
     /**

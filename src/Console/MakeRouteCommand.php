@@ -49,7 +49,7 @@ class MakeRouteCommand extends Command
         $this->controller = Str::ucfirst(Str::camel($this->table));
 
         $this->makeContent();
-        $this->info($this->content);
+        echo("{$this->content}");
 
         return true;
     }

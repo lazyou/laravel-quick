@@ -13,8 +13,9 @@ class MakeRequestCommand extends Command
      * @var string
      */
     protected $signature = 'quick:make-request {model}
+        {--request : 类名}
         {--subDir=Admin : 子目录，默认Admin}
-        {--force=0 : 强制覆盖文件}
+        {--force=0 : 强制覆盖文件(建议只在开发Command中使用)}
     ';
 
     /**
@@ -57,15 +58,19 @@ class MakeRequestCommand extends Command
      */
     public function handle()
     {
+        $this->model = $this->argument('model');
+
         $this->subDir = $this->option('subDir');
         $this->force = (bool) $this->option('force');
 
-        $this->model = $this->argument('model');
-        $this->request = $this->model;
+        $this->request = $this->option('request');
+        if (empty($this->request)) {
+            $this->request = $this->model;
+        }
 
         if ($this->checkExist()) {
             if (! $this->force) {
-                $this->error("{$this->filePath} 文件已存在");
+                echo("{$this->filePath} 文件已存在 \n");
                 return false;
             }
         }
@@ -73,10 +78,10 @@ class MakeRequestCommand extends Command
         $this->makeContent();
 
         if (file_put_contents($this->filePath, $this->content)) {
-            $this->info("{$this->filePath} 写入成功");
+            echo("{$this->filePath} 写入成功 \n");
             return true;
         } else {
-            $this->error("{$this->filePath} 写入失败");
+            echo("{$this->filePath} 写入失败 \n");
             return false;
         }
     }

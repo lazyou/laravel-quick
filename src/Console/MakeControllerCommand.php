@@ -21,7 +21,7 @@ class MakeControllerCommand extends Command
         {--subDir=Admin : 子目录，默认Admin}
         {--deleteRequest=0 : 移除请求验证}
         {--showOnly=0 : 展示代码，方便复制}
-        {--force=0 : 强制覆盖文件}
+        {--force=0 : 强制覆盖文件(建议只在开发Command中使用)}
     ';
 
     /**
@@ -86,7 +86,7 @@ class MakeControllerCommand extends Command
 
         if ($this->checkExist() && ! $this->showOnly) {
             if (! $this->force) {
-                $this->error("{$this->filePath} 文件已存在");
+                echo("{$this->filePath} 文件已存在 \n");
                 return false;
             }
         }
@@ -99,10 +99,10 @@ class MakeControllerCommand extends Command
         }
 
         if (file_put_contents($this->filePath, $this->content)) {
-            $this->info("{$this->filePath} 写入成功");
+            echo("{$this->filePath} 写入成功 \n");
             return true;
         } else {
-            $this->error("{$this->filePath} 写入失败");
+            echo("{$this->filePath} 写入失败 \n");
             return false;
         }
     }

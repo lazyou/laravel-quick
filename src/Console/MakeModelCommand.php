@@ -22,7 +22,7 @@ class MakeModelCommand extends Command
     protected $signature = 'quick:make-model {table}
         {--noType=0 : 字段无类型}
         {--showOnly=0 : 展示代码，方便复制}
-        {--force=0 : 强制覆盖文件}
+        {--force=0 : 强制覆盖文件(建议只在开发Command中使用)}
     ';
 
     /**
@@ -94,8 +94,7 @@ class MakeModelCommand extends Command
     {
         $this->table = $this->argument('table');
         if (! Schema::hasTable($this->table)) {
-            $this->error("{$this->table} 表不存在");
-            return false;
+            throw new \Exception("{$this->table} 表不存在");
         }
 
         $this->model = Str::ucfirst(Str::camel($this->table)); // 下划线转大驼峰;
@@ -107,7 +106,7 @@ class MakeModelCommand extends Command
 
         if ($this->checkExist() && ! $this->showOnly) {
             if (! $this->force) {
-                $this->error("{$this->filePath} 文件已存在");
+                echo("{$this->filePath} 文件已存在 \n");
                 return false;
             }
         }
@@ -120,10 +119,10 @@ class MakeModelCommand extends Command
         }
 
         if (file_put_contents($this->filePath, $this->content)) {
-            $this->info("{$this->filePath} 写入成功");
+            echo("{$this->filePath} 写入成功 \n");
             return true;
         } else {
-            $this->error("{$this->filePath} 写入失败");
+            echo("{$this->filePath} 写入失败 \n");
             return false;
         }
     }
